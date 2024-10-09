@@ -3,7 +3,7 @@ import json
 from streamlit_player import st_player
 
 # Load data from JSON file
-with open('beta2.json', 'r',encoding='utf-8') as f:
+with open('beta2.json', 'r', encoding='utf-8') as f:
     videos_info = json.load(f)
 
 # Add autoplay parameter to each video URL
@@ -22,6 +22,17 @@ if 'matching_videos' not in st.session_state:
 
 if 'show_artist' not in st.session_state:
     st.session_state.show_artist = False
+
+if 'form_submitted' not in st.session_state:
+    st.session_state.form_submitted = False
+
+# Add logo to the top right corner
+logo_path = "logo.jpeg"  # Replace with the path to your logo file
+
+# Create columns and place the logo in the right column
+header_col1, header_col2 = st.columns([4, 1])
+with header_col2:
+    st.image(logo_path, width=100)  # Adjust width as needed for best look
 
 # Function to switch pages
 
@@ -82,6 +93,7 @@ if st.session_state.page == 'search':
             # Reset index to 0 for the matching videos player
             st.session_state.index = 0
             st.session_state.show_artist = False  # Reset artist view
+            st.session_state.form_submitted = False  # Reset form submission state
             switch_page('matches')
 
 # Video Player for Matching Videos (Search Results)
@@ -120,8 +132,9 @@ if st.session_state.page == 'matches':
             # Update the session state index for the next video
             st.session_state.index = (
                 st.session_state.index + 1) % len(matching_videos)
-            # Hide artist info when moving to the next video
+            # Hide artist info and contact form when moving to the next video
             st.session_state.show_artist = False
+            st.session_state.form_submitted = False
             switch_page('matches')
         elif view_artist_clicked:
             st.session_state.show_artist = not st.session_state.show_artist  # Toggle artist view
@@ -135,11 +148,16 @@ if st.session_state.page == 'matches':
             st.markdown(f"**Artist Name**: {current_video_info['artist']}")
             st.markdown(
                 f"**Description**: {current_video_info['artist_description']}")
+            # Use a dialog-style interface for contact form
 
-            # Display similar works by the same artist
-            similar_works = [
-                info['title'] for info in videos_info if info['artist'] == current_video_info['artist']]
-            if similar_works:
-                st.markdown("**Similar Works:**")
-                for work in similar_works:
-                    st.markdown(f"- {work}")
+            @st.dialog("📞 Contact the Artist")
+            def contact_artist():
+                name = st.text_input("Your Name")
+                email = st.text_input("Your Email")
+                phone = st.text_input("Your Phone Number")
+                if st.button("Submit"):
+                    st.session_state.form_submitted = True
+                    st.rerun()
+            if not st.session_state.form_submitted:
+                if st.button("Contact Artist"):
+                    contact_artist()
