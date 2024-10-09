@@ -1,7 +1,7 @@
 
 # 🎉 **GNG5120 Final Project: System's Integration - Performify** 🎉
 
-**Welcome to the GitHub Repository of [Ronit Shahu](#)!**  
+**Welcome to the GitHub Repository of [Ronit Shahu](https://www.linkedin.com/in/ronit-shahu/)!**  
 This repository houses the code for our innovative project **"Performify"**.  
 Whether you're looking to contribute, explore, or simply understand more about our project, we're thrilled to have you here! 🚀
 
@@ -91,14 +91,10 @@ pip install -r Requirements.txt
 
 With your virtual environment set up and dependencies installed, you're ready to run the application:
 
-```bash
-python api.py
-```
-
-Next, launch the front-end interface with:
+launch the front-end interface with:
 
 ```bash
-streamlit run app.py
+streamlit run beta2.py
 ```
 
 This will start the Streamlit app, and you should be able to interact with it through your web browser.
