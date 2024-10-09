@@ -1,5 +1,5 @@
 
-# 🎉 **GNG5120 Final Project: System's Integration - Performify** 🎉
+# 🎉 **GNG5120 Final Project: Performify** 🎉
 
 **Welcome to the GitHub Repository of [Ronit Shahu](https://www.linkedin.com/in/ronit-shahu/)!**  
 This repository houses the code for our innovative project **"Performify"**.  
