@@ -89,7 +89,6 @@ if st.session_state.page == 'search':
         # Display the "Here are your matches" button with the number of matches
         num_matches = len(st.session_state.matching_videos)
         if st.button(f"Found {num_matches} matches - View Matches"):
-            st.snow()
             # Reset index to 0 for the matching videos player
             st.session_state.index = 0
             st.session_state.show_artist = False  # Reset artist view
